@@ -1,0 +1,7 @@
+# DotNetToJScript Guide 
+
+# Comment the line 154 which contains the version validation. 
+
+#Command to execute
+DotNetToJScript\bin\Release\DotNetToJScript.exe ExampleAssembly\bin\Release\ExampleAssembly.dll --lang=Jscript --ver=v4 -o=demo.js
+
