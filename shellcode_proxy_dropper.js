@@ -1,5 +1,4 @@
 var url = "http://192.168.19.128:8000/met.exe";
-
 var proxyServer = "";
 
 // Match exact working pattern - use MSXML2.XMLHTTP not ServerXMLHTTP
