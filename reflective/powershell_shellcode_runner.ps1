@@ -1,3 +1,5 @@
+# Replace the buf with powershell payload and run it on powershell or execute it via VBA
+
 function LookupFunc {
 
 	Param ($moduleName, $functionName)
