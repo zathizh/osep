@@ -28,4 +28,6 @@ sudo -E
 :autocmd BufWritePost * :silent :w! >> /tmp/hackedfromvim.txt
 :endif
 
-
+# Reset environment variable passing to sudo
+# File /etc/sudoers
+Defulat env_reset
