@@ -14,4 +14,8 @@ sudo -E
 :silent !source ~/.vimrunscript
 
 
+# run shell from vim
+:shell
+
+
 
