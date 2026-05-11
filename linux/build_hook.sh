@@ -20,6 +20,16 @@ fi
 # Format per key: RETURN_TYPE | PARAM_LIST | PARAM_NAMES_ONLY | EXTRA_INCLUDES
 declare -A SIG_RETURN SIG_PARAMS SIG_PARAM_NAMES SIG_INCLUDES
 
+# use below command to add signature of an unknown function
+/*
+FUNC=connect HEADER="<sys/socket.h>" && \
+  SIG=$(echo "#include ${HEADER}" | gcc -E - | grep -oE '[a-zA-Z_][a-zA-Z0-9_ *]+\b'"${FUNC}"'\s*\([^;]+\)' | grep -v define | tail -1) && \
+  RET=$(echo "$SIG" | sed "s/\b${FUNC}\b.*//;s/__attribute__.*//;s/extern //;s/^ *//;s/ *$//") && \
+  PARAMS=$(echo "$SIG" | grep -oP '(?<='"${FUNC}"'\s{0,5}\().*?(?=\))' | sed 's/__restrict//g;s/  */ /g') && \
+  PNAMES=$(echo "$PARAMS" | tr ',' '\n' | awk '{w=$NF; gsub(/[^a-zA-Z0-9_]/,"",w); printf "%s%s", (NR>1?", ":""), w}') && \
+  echo "SIG_RETURN[${FUNC}]=\"${RET}\";  SIG_PARAMS[${FUNC}]=\"${PARAMS}\";  SIG_PARAM_NAMES[${FUNC}]=\"${PNAMES}\";  SIG_INCLUDES[${FUNC}]=\"#include ${HEADER}\""
+*/
+
 # uid/gid
 SIG_RETURN[geteuid]="uid_t";   SIG_PARAMS[geteuid]="void";                                                      SIG_PARAM_NAMES[geteuid]="";                              SIG_INCLUDES[geteuid]="#include <sys/types.h>\n#include <unistd.h>"
 SIG_RETURN[getuid]="uid_t";    SIG_PARAMS[getuid]="void";                                                       SIG_PARAM_NAMES[getuid]="";                               SIG_INCLUDES[getuid]="#include <sys/types.h>\n#include <unistd.h>"
